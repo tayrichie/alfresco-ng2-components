@@ -26,7 +26,7 @@ export const assignedTaskDetailsCloudMock = new TaskDetailsCloudModel(
         'name': 'This is a new task ',
         'description': 'This is the description ',
         'createdDate': 1545048055900,
-        'dueDate': 1545091200000,
+        'dueDate': Date.now(),
         'claimedDate': null,
         'priority': 5,
         'category': null,
@@ -39,7 +39,7 @@ export const assignedTaskDetailsCloudMock = new TaskDetailsCloudModel(
         'lastModified': 1545048055900,
         'lastModifiedTo': null,
         'lastModifiedFrom': null,
-        'standAlone': true
+        'standalone': true
     }
 );
 
@@ -65,7 +65,7 @@ export const createdTaskDetailsCloudMock = new TaskDetailsCloudModel(
         'lastModified': 1545048055900,
         'lastModifiedTo': null,
         'lastModifiedFrom': null,
-        'standAlone': true
+        'standalone': true
     }
 );
 
@@ -91,6 +91,6 @@ export const emptyOwnerTaskDetailsCloudMock = new TaskDetailsCloudModel(
         'lastModified': 1545048055900,
         'lastModifiedTo': null,
         'lastModifiedFrom': null,
-        'standAlone': true
+        'standalone': true
     }
 );
