@@ -48,10 +48,10 @@ export class SimpleSearchTestCustomEmptyComponent {
 
     customMessage: string = '';
 
-    @ViewChild(SearchControlComponent)
+    @ViewChild(SearchControlComponent, { static: false })
     searchComponent: SearchControlComponent;
 
-    @ViewChild(SearchTextInputComponent)
+    @ViewChild(SearchTextInputComponent, { static: false })
     searchTextInputComponent: SearchTextInputComponent;
 
     constructor() {
