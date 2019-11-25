@@ -92,7 +92,7 @@ export class PeopleCloudComponent implements OnInit, OnChanges, OnDestroy {
     @Output()
     warning = new EventEmitter<any>();
 
-    @ViewChild('userInput')
+    @ViewChild('userInput', { static: false })
     private userInput: ElementRef<HTMLInputElement>;
 
     private _searchUsers: IdentityUserModel[] = [];

@@ -140,10 +140,10 @@ export class ContentNodeSelectorPanelComponent implements OnInit, OnDestroy {
     @Output()
     select: EventEmitter<Node[]> = new EventEmitter<Node[]>();
 
-    @ViewChild('documentList')
+    @ViewChild('documentList', { static: true })
     documentList: DocumentListComponent;
 
-    @ViewChild(HighlightDirective)
+    @ViewChild(HighlightDirective, { static: true })
     highlighter: HighlightDirective;
 
     nodePaging: NodePaging | null = null;
@@ -158,7 +158,7 @@ export class ContentNodeSelectorPanelComponent implements OnInit, OnDestroy {
 
     pagination: PaginationModel = this.DEFAULT_PAGINATION;
 
-    @ViewChild(InfinitePaginationComponent)
+    @ViewChild(InfinitePaginationComponent, { static: true })
     infinitePaginationComponent: InfinitePaginationComponent;
 
     infiniteScroll: boolean = false;

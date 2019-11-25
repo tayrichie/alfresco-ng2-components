@@ -87,7 +87,7 @@ export class GroupCloudComponent implements OnInit, OnChanges, OnDestroy {
     @Output()
     removeGroup = new EventEmitter<IdentityGroupModel>();
 
-    @ViewChild('groupInput')
+    @ViewChild('groupInput', { static: false })
     private groupInput: ElementRef<HTMLInputElement>;
 
     private selectedGroups: IdentityGroupModel[] = [];
