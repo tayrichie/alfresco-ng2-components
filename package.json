@@ -118,7 +118,7 @@
     "raphael": "2.2.7",
     "reflect-metadata": "0.1.13",
     "remark-validate-links": "^8.0.0",
-    "rxjs": "^6.2.2",
+    "rxjs": "^6.5.3",
     "snyk": "^1.250.0",
     "systemjs": "0.19.27",
     "web-animations-js": "2.3.1",
