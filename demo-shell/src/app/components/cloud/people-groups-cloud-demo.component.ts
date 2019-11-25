@@ -17,7 +17,8 @@
 
 import { Component, ViewEncapsulation } from '@angular/core';
 import { PeopleCloudComponent, GroupCloudComponent } from '@alfresco/adf-process-services-cloud';
-import { MatRadioChange, MatCheckboxChange } from '@angular/material';
+import { MatRadioChange } from '@angular/material/radio';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { IdentityGroupModel } from '@alfresco/adf-core';
 
 @Component({
