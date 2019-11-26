@@ -41,7 +41,7 @@ import { TaskListCloudModule } from '../task-list-cloud.module';
     </adf-cloud-task-list>`
 })
 class CustomTaskListComponent {
-    @ViewChild(TaskListCloudComponent)
+    @ViewChild(TaskListCloudComponent, { static: false })
     taskList: TaskListCloudComponent;
 }
 @Component({
@@ -65,7 +65,7 @@ class EmptyTemplateComponent {
     </adf-cloud-task-list>`
 })
 class CustomCopyContentTaskListComponent {
-    @ViewChild(TaskListCloudComponent)
+    @ViewChild(TaskListCloudComponent, { static: false })
     taskList: TaskListCloudComponent;
 }
 
