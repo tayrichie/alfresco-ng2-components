@@ -137,7 +137,8 @@
     "booleanvisibility",
     "processparent",
     "uploadfileform",
-    "processwithstarteventform"
+    "processwithstarteventform",
+    "UNPATCHED"
   ],
   "dictionaries": [
     "html",
