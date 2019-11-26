@@ -32,7 +32,7 @@
     "minimatch-browser": ">=1.0.0",
     "moment": ">=2.22.2",
     "pdfjs-dist": "2.0.489",
-    "zone.js": ">=0.9.1"
+    "zone.js": ">=0.10.2"
   },
   "keywords": [
     "core",
