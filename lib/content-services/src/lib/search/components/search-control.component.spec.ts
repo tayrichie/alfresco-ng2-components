@@ -48,14 +48,11 @@ export class SimpleSearchTestCustomEmptyComponent {
 
     customMessage: string = '';
 
-    @ViewChild(SearchControlComponent, { static: false })
+    @ViewChild(SearchControlComponent, { static: true })
     searchComponent: SearchControlComponent;
 
-    @ViewChild(SearchTextInputComponent, { static: false })
+    @ViewChild(SearchTextInputComponent, { static: true })
     searchTextInputComponent: SearchTextInputComponent;
-
-    constructor() {
-    }
 
     setCustomMessageForNoResult(message: string) {
         this.customMessage = message;
