@@ -28,44 +28,45 @@ import { TaskListCloudModule } from '../task-list-cloud.module';
 
 @Component({
     template: `
-    <adf-cloud-task-list #taskListCloud>
-        <data-columns>
-            <data-column key="name" title="ADF_CLOUD_TASK_LIST.PROPERTIES.NAME" class="adf-full-width adf-name-column"></data-column>
-            <data-column key="created" title="ADF_CLOUD_TASK_LIST.PROPERTIES.CREATED" class="adf-hidden"></data-column>
-            <data-column key="startedBy" title="ADF_CLOUD_TASK_LIST.PROPERTIES.CREATED" class="adf-desktop-only dw-dt-col-3 adf-ellipsis-cell">
-                <ng-template let-entry="$implicit">
-                    <div>{{getFullName(entry.row.obj.startedBy)}}</div>
-                </ng-template>
-            </data-column>
-        </data-columns>
-    </adf-cloud-task-list>`
+        <adf-cloud-task-list #taskListCloud>
+            <data-columns>
+                <data-column key="name" title="ADF_CLOUD_TASK_LIST.PROPERTIES.NAME" class="adf-full-width adf-name-column"></data-column>
+                <data-column key="created" title="ADF_CLOUD_TASK_LIST.PROPERTIES.CREATED" class="adf-hidden"></data-column>
+                <data-column key="startedBy" title="ADF_CLOUD_TASK_LIST.PROPERTIES.CREATED" class="adf-desktop-only dw-dt-col-3 adf-ellipsis-cell">
+                    <ng-template let-entry="$implicit">
+                        <div>{{getFullName(entry.row.obj.startedBy)}}</div>
+                    </ng-template>
+                </data-column>
+            </data-columns>
+        </adf-cloud-task-list>
+    `
 })
 class CustomTaskListComponent {
-    @ViewChild(TaskListCloudComponent, { static: false })
+    @ViewChild(TaskListCloudComponent, { static: true })
     taskList: TaskListCloudComponent;
 }
 @Component({
     template: `
-    <adf-tasklist>
-        <adf-empty-content-holder>
-            <p id="custom-id"></p>
-        </adf-empty-content-holder>
-    </adf-tasklist>
-       `
+        <adf-tasklist>
+            <adf-empty-content-holder>
+                <p id="custom-id"></p>
+            </adf-empty-content-holder>
+        </adf-tasklist>
+    `
 })
 class EmptyTemplateComponent {
 }
 @Component({
     template: `
-    <adf-cloud-task-list #taskListCloudCopy>
-        <data-columns>
-            <data-column [copyContent]="true" key="entry.id" title="ADF_CLOUD_TASK_LIST.PROPERTIES.ID"></data-column>
-            <data-column key="entry.name" title="ADF_CLOUD_TASK_LIST.PROPERTIES.NAME"></data-column>
-        </data-columns>
-    </adf-cloud-task-list>`
+        <adf-cloud-task-list #taskListCloudCopy>
+            <data-columns>
+                <data-column [copyContent]="true" key="entry.id" title="ADF_CLOUD_TASK_LIST.PROPERTIES.ID"></data-column>
+                <data-column key="entry.name" title="ADF_CLOUD_TASK_LIST.PROPERTIES.NAME"></data-column>
+            </data-columns>
+        </adf-cloud-task-list>`
 })
 class CustomCopyContentTaskListComponent {
-    @ViewChild(TaskListCloudComponent, { static: false })
+    @ViewChild(TaskListCloudComponent, { static: true })
     taskList: TaskListCloudComponent;
 }
 
@@ -77,9 +78,9 @@ describe('TaskListCloudComponent', () => {
 
     setupTestBed({
         imports: [
-            ProcessServiceCloudTestingModule, TaskListCloudModule
-        ],
-        providers: [TaskListCloudService]
+            ProcessServiceCloudTestingModule,
+            TaskListCloudModule
+        ]
     });
 
     beforeEach(() => {
