@@ -17,24 +17,27 @@
 
 import { Component, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CoreModule, IdentityUserService, setupTestBed } from '@alfresco/adf-core';
+import {
+    CoreModule,
+    IdentityUserService,
+    setupTestBed
+} from '@alfresco/adf-core';
 import { DeleteProcessDirective } from './delete-process.directive';
 import { ProcessCloudService } from '../services/process-cloud.service';
 import { of } from 'rxjs';
 
 describe('DeleteProcessDirective', () => {
-
     @Component({
         selector: 'adf-cloud-delete-process-test-component',
-        template: '<button adf-cloud-delete-process [processId]="processIdMock" [appName]="appNameMock" [processInitiator]="initiatorMock"></button>'
+        template:
+            '<button adf-cloud-delete-process [processId]="processIdMock" [appName]="appNameMock" [processInitiator]="initiatorMock"></button>'
     })
     class TestComponent {
-
         processIdMock = 'process-id-mock';
         appNameMock = 'app-mock';
         initiatorMock = 'user-mock';
 
-        @ViewChild(DeleteProcessDirective)
+        @ViewChild(DeleteProcessDirective, { static: true })
         deleteProcessDirective: DeleteProcessDirective;
     }
 
@@ -43,20 +46,17 @@ describe('DeleteProcessDirective', () => {
     let identityUserService: IdentityUserService;
 
     setupTestBed({
-        imports: [
-            CoreModule.forRoot()
-        ],
-        declarations: [
-            TestComponent,
-            DeleteProcessDirective
-        ]
+        imports: [CoreModule.forRoot()],
+        declarations: [TestComponent, DeleteProcessDirective]
     });
 
     beforeEach(() => {
         processCloudService = TestBed.get(ProcessCloudService);
         fixture = TestBed.createComponent(TestComponent);
         identityUserService = TestBed.get(IdentityUserService);
-        spyOn(identityUserService, 'getCurrentUserInfo').and.returnValue({username: 'user-mock'});
+        spyOn(identityUserService, 'getCurrentUserInfo').and.returnValue({
+            username: 'user-mock'
+        });
         fixture.detectChanges();
     });
 
@@ -66,7 +66,6 @@ describe('DeleteProcessDirective', () => {
         button.click();
         expect(processCloudService.deleteProcess).toHaveBeenCalled();
     });
-
 });
 
 describe('Validation Errors', () => {
@@ -76,15 +75,16 @@ describe('Validation Errors', () => {
         template: '<button adf-cloud-delete-process></button>'
     })
     class DeleteProcessMissingInputsDirectiveComponent {
-        @ViewChild(DeleteProcessDirective)
+        @ViewChild(DeleteProcessDirective, { static: true })
         deleteProcessDirective: DeleteProcessDirective;
     }
 
     @Component({
-        template: '<button adf-cloud-delete-process [processId]="processId" [processInitiator]="processInitiator"></button>'
+        template:
+            '<button adf-cloud-delete-process [processId]="processId" [processInitiator]="processInitiator"></button>'
     })
     class DeleteProcessMissingAppNameDirectiveComponent {
-        @ViewChild(DeleteProcessDirective)
+        @ViewChild(DeleteProcessDirective, { static: true })
         deleteProcessDirective: DeleteProcessDirective;
 
         processId = 'id-mock';
@@ -92,10 +92,11 @@ describe('Validation Errors', () => {
     }
 
     @Component({
-        template: '<button adf-cloud-delete-process [appName]="appName" [processInitiator]="processInitiator"></button>'
+        template:
+            '<button adf-cloud-delete-process [appName]="appName" [processInitiator]="processInitiator"></button>'
     })
     class DeleteProcessMissingProcessIdDirectiveComponent {
-        @ViewChild(DeleteProcessDirective)
+        @ViewChild(DeleteProcessDirective, { static: true })
         deleteProcessDirective: DeleteProcessDirective;
 
         appName = 'app-mock';
@@ -103,10 +104,11 @@ describe('Validation Errors', () => {
     }
 
     @Component({
-        template: '<button adf-cloud-delete-process [appName]="appName" [processId]="processId"></button>'
+        template:
+            '<button adf-cloud-delete-process [appName]="appName" [processId]="processId"></button>'
     })
     class DeleteProcessMissingProcessInitiatorDirectiveComponent {
-        @ViewChild(DeleteProcessDirective)
+        @ViewChild(DeleteProcessDirective, { static: true })
         deleteProcessDirective: DeleteProcessDirective;
 
         appName = 'app-mock';
@@ -114,9 +116,7 @@ describe('Validation Errors', () => {
     }
 
     setupTestBed({
-        imports: [
-            CoreModule.forRoot()
-        ],
+        imports: [CoreModule.forRoot()],
         declarations: [
             DeleteProcessMissingInputsDirectiveComponent,
             DeleteProcessMissingAppNameDirectiveComponent,
@@ -127,23 +127,38 @@ describe('Validation Errors', () => {
     });
 
     it('should throw an error when appName processId and processInitiator are undefined', () => {
-        fixture = TestBed.createComponent(DeleteProcessMissingInputsDirectiveComponent);
-        expect(() => fixture.detectChanges()).toThrowError('Attribute processId, appName, processInitiator is required');
+        fixture = TestBed.createComponent(
+            DeleteProcessMissingInputsDirectiveComponent
+        );
+        expect(() => fixture.detectChanges()).toThrowError(
+            'Attribute processId, appName, processInitiator is required'
+        );
     });
 
     it('should throw an error when appName is missing', () => {
-        fixture = TestBed.createComponent(DeleteProcessMissingAppNameDirectiveComponent);
-        expect(() => fixture.detectChanges()).toThrowError('Attribute appName is required');
+        fixture = TestBed.createComponent(
+            DeleteProcessMissingAppNameDirectiveComponent
+        );
+        expect(() => fixture.detectChanges()).toThrowError(
+            'Attribute appName is required'
+        );
     });
 
     it('should throw an error when processId is missing', () => {
-        fixture = TestBed.createComponent(DeleteProcessMissingProcessIdDirectiveComponent);
-        expect(() => fixture.detectChanges()).toThrowError('Attribute processId is required');
+        fixture = TestBed.createComponent(
+            DeleteProcessMissingProcessIdDirectiveComponent
+        );
+        expect(() => fixture.detectChanges()).toThrowError(
+            'Attribute processId is required'
+        );
     });
 
     it('should throw an error when processInitiator is missing', () => {
-        fixture = TestBed.createComponent(DeleteProcessMissingProcessInitiatorDirectiveComponent);
-        expect(() => fixture.detectChanges()).toThrowError('Attribute processInitiator is required');
+        fixture = TestBed.createComponent(
+            DeleteProcessMissingProcessInitiatorDirectiveComponent
+        );
+        expect(() => fixture.detectChanges()).toThrowError(
+            'Attribute processInitiator is required'
+        );
     });
-
 });
