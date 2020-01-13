@@ -1,9 +1,9 @@
 <form>
     <mat-form-field class="adf-people-cloud">
         <mat-label id="adf-people-cloud-title-id">{{ title | translate }}</mat-label>
-        <mat-chip-list #userChipList *ngIf="isMultipleMode(); else singleSelection">
+        <mat-chip-list #userMultipleChipList [disabled]="isReadonly()" data-automation-id="adf-cloud-people-chip-list">
         <mat-chip
-            *ngFor="let user of selectedUsers$ | async"
+            *ngFor="let user of selectedUsers"
             [removable]="!(user.readonly)"
             [attr.data-automation-id]="'adf-people-cloud-chip-' + user.username"
             matTooltip="{{ (user.readonly ? 'ADF_CLOUD_GROUPS.MANDATORY' : '') | translate }}"
@@ -19,25 +19,16 @@
         <input
             #userInput
             matInput
+            [disabled]="isSingleSearchDisabled()"
             [formControl]="searchUserCtrl"
             [matAutocomplete]="auto"
-            [matChipInputFor]="userChipList"
-            class="adf-cloud-input"
+            [matChipInputFor]="userMultipleChipList"
             (focus)="setFocus(true)"
             (blur)="setFocus(false)"
+            class="adf-cloud-input"
             data-automation-id="adf-people-cloud-search-input">
         </mat-chip-list>
 
-        <ng-template #singleSelection>
-        <input matInput
-            (focus)="setFocus(true)"
-            (blur)="setFocus(false)"
-            class="adf-cloud-input"
-            data-automation-id="adf-people-cloud-search-input"
-            type="text"
-            [formControl]="searchUserCtrl"
-            [matAutocomplete]="auto">
-        </ng-template>
         <mat-autocomplete autoActiveFirstOption class="adf-people-cloud-list"
                         #auto="matAutocomplete"
                         (optionSelected)="onSelect($event.option.value)"
@@ -52,7 +43,7 @@
     </mat-form-field>
     <div class="adf-start-task-cloud-error">
         <div *ngIf="hasErrorMessage()" fxLayout="row" fxLayoutAlign="start start" [@transitionMessages]="_subscriptAnimationState">
-            <div class="adf-start-task-cloud-error-message">{{ 'ADF_CLOUD_START_TASK.ERROR.MESSAGE' | translate }}</div>
+            <div class="adf-start-task-cloud-error-message">{{ validateUsersMessage }}</div>
             <mat-icon class="adf-start-task-cloud-error-icon">warning</mat-icon>
         </div>
     </div>

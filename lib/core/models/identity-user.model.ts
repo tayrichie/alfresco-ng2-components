@@ -25,4 +25,5 @@ export interface IdentityUserModel {
     emailVerified?: boolean;
     enabled?: boolean;
     readonly?: boolean;
+    isValid?: boolean;
 }
