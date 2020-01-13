@@ -275,20 +275,20 @@ export class PeopleCloudComponent implements OnInit, OnChanges, OnDestroy {
             await this.validatePreselectUsers();
             this.checkPreselectValidationErrors();
         } else {
-            this.searchUserCtrl.setErrors(null);
+            this.clearError();
         }
     }
 
     async validatePreselectUsers(): Promise<any> {
-            await Promise.all(this.selectedUsers.map(async (user: IdentityUserModel) => {
-                try {
-                    await this.searchUser(user);
-                    user.isValid = true;
-                } catch (error) {
-                    user.isValid = false;
-                    this.logService.error(error);
-                }
-            }));
+        await Promise.all(this.selectedUsers.map(async (user: IdentityUserModel) => {
+            try {
+                await this.searchUser(user);
+                user.isValid = true;
+            } catch (error) {
+                user.isValid = false;
+                this.logService.error(error);
+            }
+        }));
     }
 
     async searchUser(user: IdentityUserModel) {
@@ -303,10 +303,14 @@ export class PeopleCloudComponent implements OnInit, OnChanges, OnDestroy {
         }
 
         switch (key) {
-            case 'id': return this.identityUserService.findUserById(user[key]).toPromise();
-            case 'username': return (await this.identityUserService.findUserByUsername(user[key]).toPromise())[0];
-            case 'email': return (await this.identityUserService.findUserByEmail(user[key]).toPromise())[0];
-            default: return of([]);
+            case 'id':
+                return this.identityUserService.findUserById(user[key]).toPromise();
+            case 'username':
+                return (await this.identityUserService.findUserByUsername(user[key]).toPromise())[0];
+            case 'email':
+                return (await this.identityUserService.findUserByEmail(user[key]).toPromise())[0];
+            default:
+                return of([]);
         }
     }
 
@@ -334,7 +338,7 @@ export class PeopleCloudComponent implements OnInit, OnChanges, OnDestroy {
             message: 'INVALID_PRESELECTED_USERS',
             users: invalidUsers
         });
-        if (invalidUsers) {
+        if (invalidUsers.length > 0) {
             this.searchUserCtrl.setErrors({ invalid: true });
         }
     }
@@ -431,5 +435,4 @@ export class PeopleCloudComponent implements OnInit, OnChanges, OnDestroy {
     hasErrorMessage(): boolean {
         return !this.isFocused && this.hasError();
     }
-
 }

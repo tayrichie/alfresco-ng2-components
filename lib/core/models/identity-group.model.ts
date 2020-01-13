@@ -26,6 +26,7 @@ export interface IdentityGroupModel {
     access?: any;
     attributes?: any;
     readonly?: boolean;
+    isValid?: boolean;
 }
 
 export interface IdentityGroupSearchParam {

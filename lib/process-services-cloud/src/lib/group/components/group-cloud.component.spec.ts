@@ -439,16 +439,49 @@ describe('GroupCloudComponent', () => {
         });
     });
 
+    describe('Single Mode and Pre-selected groups with readonly mode', () => {
+        beforeEach(async( () => {
+            component.preSelectGroups = [
+                { id: mockIdentityGroups[0].id, name: mockIdentityGroups[0].name, readonly: true }
+            ];
+            component.mode = 'single';
+            component.readOnly = true;
+            fixture.detectChanges();
+        }));
+
+        it('should group input be disabled', () => {
+            fixture.whenStable().then(() => {
+                fixture.detectChanges();
+                const groupInput = fixture.nativeElement.querySelector('[data-automation-id="adf-cloud-group-search-input"]');
+                expect(groupInput.readOnly).toBeTruthy();
+            });
+        });
+    });
+
     describe('Multiple Mode with read-only', () => {
+
+        it('should group chip-list be disabled', () => {
+            component.preSelectGroups = [
+                { id: mockIdentityGroups[0].id, name: mockIdentityGroups[0].name },
+                { id: mockIdentityGroups[1].id, name: mockIdentityGroups[1].name }
+            ];
+            component.mode = 'multiple';
+            component.readOnly = true;
+            fixture.detectChanges();
+            fixture.whenStable().then(() => {
+                fixture.detectChanges();
+                const matChipList = fixture.nativeElement.querySelector('mat-chip-list');
+                expect(matChipList.attributes['ng-reflect-disabled'].value).toBeTruthy();
+            });
+        });
 
         it('Should not show remove icon for pre-selected groups if readonly property set to true', (done) => {
             fixture.detectChanges();
-            const preselectedGroups = [
+            component.preSelectGroups = [
                 { id: mockIdentityGroups[0].id, name: mockIdentityGroups[0].name, readonly: true },
                 { id: mockIdentityGroups[1].id, name: mockIdentityGroups[1].name, readonly: true }
             ];
-            component.preSelectGroups = preselectedGroups;
-            const change = new SimpleChange(null, preselectedGroups, false);
+            const change = new SimpleChange(null, component.preSelectGroups, false);
             component.mode = 'multiple';
             component.ngOnChanges({ 'preSelectGroups': change });
             fixture.detectChanges();
@@ -471,12 +504,11 @@ describe('GroupCloudComponent', () => {
 
         it('Should be able to remove preselected groups if readonly property set to false', (done) => {
             fixture.detectChanges();
-            const preselectedGroups = [
+            component.preSelectGroups = [
                 { id: mockIdentityGroups[0].id, name: mockIdentityGroups[0].name, readonly: false },
                 { id: mockIdentityGroups[1].id, name: mockIdentityGroups[1].name, readonly: false }
             ];
-            component.preSelectGroups = preselectedGroups;
-            const change = new SimpleChange(null, preselectedGroups, false);
+            const change = new SimpleChange(null, component.preSelectGroups, false);
             component.mode = 'multiple';
             const removeGroupSpy = spyOn(component.removeGroup, 'emit');
             component.ngOnChanges({ 'preSelectGroups': change });
