@@ -40,10 +40,9 @@
         </mat-autocomplete>
     </mat-form-field>
     <div class="adf-start-task-cloud-error">
-        <div *ngIf="hasErrorMessage()" fxLayout="row" fxLayoutAlign="start start"
-             [@transitionMessages]="_subscriptAnimationState">
-            <div class="adf-start-task-cloud-error-message">{{ validateUsersMessage }}</div>
+        <div *ngIf="hasErrorMessage()" fxLayout="row" fxLayoutAlign="start start" [@transitionMessages]="_subscriptAnimationState">
             <mat-icon class="adf-start-task-cloud-error-icon">warning</mat-icon>
+            <div class="adf-start-task-cloud-error-message">{{ 'ADF_CLOUD_USERS.ERROR.NOT_FOUND' | translate : { userNames : getErrorMsg() } }}</div>
         </div>
     </div>
 </form>

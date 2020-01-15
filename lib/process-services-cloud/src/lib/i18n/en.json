@@ -178,7 +178,12 @@
     "SEARCH-GROUP": "Groups",
     "MANDATORY": "Mandatory",
     "ERROR": {
-      "NOT_FOUND": "No group found with the name {{groupName}}"
+      "NOT_FOUND": "No groups found with the name {{groupNames}}"
+    }
+  },
+  "ADF_CLOUD_USERS": {
+    "ERROR": {
+      "NOT_FOUND": "No users found with the name {{userNames}}"
     }
   },
   "ADF_CLOUD_TASK_HEADER": {

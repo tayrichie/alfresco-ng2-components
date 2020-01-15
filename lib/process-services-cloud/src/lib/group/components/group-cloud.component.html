@@ -29,6 +29,7 @@
         </mat-chip-list>
 
         <mat-autocomplete
+            autoActiveFirstOption
             #auto="matAutocomplete"
             class="adf-cloud-group-list"
             (optionSelected)="onSelect($event.option.value)"
@@ -44,10 +45,12 @@
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
-    <div class="adf-cloud-group-error" *ngIf="hasErrorMessage()">
+    <div class="adf-cloud-group-error" *ngIf="hasError()">
         <div fxLayout="row" fxLayoutAlign="start start" [@transitionMessages]="_subscriptAnimationState">
-            <div class="adf-cloud-group-error-message"> {{validateGroupsMessage}}</div>
             <mat-icon class="adf-cloud-group-error-icon">warning</mat-icon>
+            <div class="adf-cloud-group-error-message">
+                {{ 'ADF_CLOUD_GROUPS.ERROR.NOT_FOUND' | translate : { groupNames: getErrorMsg() } }}
+            </div>
         </div>
     </div>
 </form>
