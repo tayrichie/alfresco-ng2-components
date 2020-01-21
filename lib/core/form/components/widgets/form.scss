@@ -11,6 +11,11 @@
         }
     }
 
+    .mat-datetimepicker-calendar-body-active > .mat-datetimepicker-calendar-body-cell-content {
+        background-color: mat-color($accent);
+        color: #fff;
+    }
+
     .adf {
 
         &-error-text-container {
